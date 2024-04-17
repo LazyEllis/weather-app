@@ -1,0 +1,42 @@
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+$placeholder-color: #aeb2b6;
+$border-color: #495057;
+$gray-300: #dee2e6;
+
+@mixin search-box($border-color, $color) {
+  border-color: $border-color;
+  color: $color;
+
+  i {
+    color: inherit;
+  }
+}
+
+.btn.search-btn {
+  width: 100%;
+  @include search-box($border-color, $placeholder-color);
+
+  &:hover {
+    @include search-box($gray-300, $gray-300);
+  }
+}
+
+.weather-form {
+  padding: 0 12px;
+}
+
+.search-label {
+  padding: 6px 0;
+}
+
+.search-input:focus {
+  box-shadow: none;
+}
+
+@media (min-width: 992px) {
+  .search-btn-container {
+    width: 251px;
+  }
+}
