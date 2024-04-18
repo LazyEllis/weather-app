@@ -7,6 +7,11 @@ const weatherForm = document.querySelector(".weather-form");
 const searchModal = document.querySelector("#search-modal");
 const modal = new Modal(searchModal);
 
+const renderDefaultWeatherInfo = async () => {
+  const weatherInfo = await getWeatherInfo("London");
+  renderWeatherInfo(weatherInfo);
+};
+
 weatherForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -17,3 +22,5 @@ weatherForm.addEventListener("submit", async (e) => {
   modal.hide();
   e.target.reset();
 });
+
+renderDefaultWeatherInfo();
