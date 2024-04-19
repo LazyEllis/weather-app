@@ -1,4 +1,5 @@
 const container = document.querySelector(".container");
+const spinner = document.querySelector(".spinner-border");
 
 const clearWeatherInfo = () => {
   while (container.firstChild) {
@@ -133,7 +134,25 @@ const createWeatherInfoCard = (title, info) => {
   return cardContainer;
 };
 
-const renderWeatherInfo = (weatherInfo) => {
+export const toggleSearchIcon = (searchBox) => {
+  const searchIcon = document.createElement("i");
+  const initialIcon = searchBox.firstElementChild;
+
+  searchIcon.classList.add("bi", "bi-search");
+
+  if (searchBox.classList.contains("search-btn"))
+    searchIcon.classList.add("me-0", "me-lg-2");
+
+  searchBox.removeChild(initialIcon);
+
+  if (initialIcon.classList.contains("spinner-border")) {
+    searchBox.prepend(searchIcon);
+  } else {
+    searchBox.prepend(spinner.cloneNode());
+  }
+};
+
+export const renderWeatherInfo = (weatherInfo) => {
   clearWeatherInfo();
 
   const header = createHeader(
@@ -176,5 +195,3 @@ const renderWeatherInfo = (weatherInfo) => {
 
   container.append(header, heroCard, row);
 };
-
-export default renderWeatherInfo;
