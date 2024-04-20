@@ -1,6 +1,6 @@
 const getWeatherInfo = async (location) => {
   const response = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=6bbd995eb9474538a56122220241704&q=${location}`,
+    `https://api.weatherapi.com/v1/forecast.json?key=6bbd995eb9474538a56122220241704&q=${location}`,
     { mode: "cors" }
   );
   const data = await response.json();
@@ -15,6 +15,7 @@ const getWeatherInfo = async (location) => {
     temperatureCelsius: data.current.temp_c,
     temperatureFahrenheit: data.current.temp_f,
     uvIndex: data.current.uv,
+    sunrise: data.forecast.forecastday[0].astro.sunrise,
     windSpeed: data.current.wind_kph,
     precipitation: data.current.precip_mm,
     apparentTemperatureCelsius: data.current.feelslike_c,

@@ -33,6 +33,8 @@ const createCardTitle = (title) => {
     cardIcon.classList.add("bi", "bi-eye-fill", "me-2");
   } else if (title === "Pressure") {
     cardIcon.classList.add("bi", "bi-speedometer", "me-2");
+  } else if (title === "Sunrise") {
+    cardIcon.classList.add("bi", "bi-sunrise-fill", "me-2");
   }
 
   cardTitle.textContent = title;
@@ -59,6 +61,8 @@ const createCardText = (title, info) => {
     cardText.textContent = `${info} km`;
   } else if (title === "Pressure") {
     cardText.textContent = `${info} mb`;
+  } else if (title === "Sunrise") {
+    cardText.textContent = `${info.slice(1)}`;
   }
 
   return cardText;
@@ -118,12 +122,7 @@ const createWeatherInfoCard = (title, info) => {
   const cardTitle = createCardTitle(title);
   const cardText = createCardText(title, info);
 
-  if (title === "Feels Like") {
-    cardContainer.classList.add("col-sm-12");
-  } else {
-    cardContainer.classList.add("col");
-  }
-
+  cardContainer.classList.add("col");
   card.classList.add("card");
   cardBody.classList.add("card-body");
 
@@ -166,15 +165,16 @@ export const renderWeatherInfo = (weatherInfo) => {
     weatherInfo.condition
   );
   const row = createRow();
-  const apparentTemperatureCard = createWeatherInfoCard(
-    "Feels Like",
-    weatherInfo.apparentTemperatureCelsius
-  );
-  const windCard = createWeatherInfoCard("Wind", weatherInfo.windSpeed);
   const uvIndexCard = createWeatherInfoCard("UV Index", weatherInfo.uvIndex);
+  const sunriseCard = createWeatherInfoCard("Sunrise", weatherInfo.sunrise);
+  const windCard = createWeatherInfoCard("Wind", weatherInfo.windSpeed);
   const precipitationCard = createWeatherInfoCard(
     "Precipitation",
     weatherInfo.precipitation
+  );
+  const apparentTemperatureCard = createWeatherInfoCard(
+    "Feels Like",
+    weatherInfo.apparentTemperatureCelsius
   );
   const humidityCard = createWeatherInfoCard("Humidity", weatherInfo.humidity);
   const visibilityCard = createWeatherInfoCard(
@@ -184,10 +184,11 @@ export const renderWeatherInfo = (weatherInfo) => {
   const pressureCard = createWeatherInfoCard("Pressure", weatherInfo.pressure);
 
   row.append(
-    apparentTemperatureCard,
-    windCard,
     uvIndexCard,
+    sunriseCard,
+    windCard,
     precipitationCard,
+    apparentTemperatureCard,
     humidityCard,
     visibilityCard,
     pressureCard
