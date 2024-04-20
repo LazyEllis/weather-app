@@ -10,7 +10,7 @@ const searchLabel = document.querySelector(".search-label");
 const modal = new Modal(searchModal);
 
 const renderDefaultWeatherInfo = async () => {
-  const weatherInfo = await getWeatherInfo("London");
+  const weatherInfo = await getWeatherInfo("auto:ip");
   toggleSearchIcon(searchBtn);
   if (weatherInfo.error) {
     renderErrorInfo(weatherInfo.error);
