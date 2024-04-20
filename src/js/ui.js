@@ -9,7 +9,7 @@ const clearWeatherInfo = () => {
 
 const createRow = () => {
   const row = document.createElement("div");
-  row.classList.add("row", "row-cols-1", "row-cols-sm-2", "g-3");
+  row.classList.add("row", "row-cols-1", "row-cols-xs-2", "g-3");
   return row;
 };
 
