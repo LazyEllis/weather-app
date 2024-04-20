@@ -167,6 +167,27 @@ export const toggleSearchIcon = (searchBox) => {
   }
 };
 
+export const renderErrorInfo = (error) => {
+  clearWeatherInfo();
+  const errorContainer = document.createElement("div");
+  const errorIcon = document.createElement("i");
+  const errorText = document.createElement("div");
+
+  errorContainer.classList.add(
+    "d-flex",
+    "justify-content-center",
+    "align-items-center",
+    "h-100"
+  );
+  errorIcon.classList.add("bi", "bi-exclamation-triangle", "fs-1", "me-2");
+  errorText.classList.add("fs-3");
+
+  errorText.textContent = error;
+
+  errorContainer.append(errorIcon, errorText);
+  container.append(errorContainer);
+};
+
 export const renderWeatherInfo = (weatherInfo) => {
   clearWeatherInfo();
 

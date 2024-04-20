@@ -1,7 +1,7 @@
 import "../scss/style.scss";
 import { Modal } from "bootstrap";
 import getWeatherInfo from "./weather";
-import { toggleSearchIcon, renderWeatherInfo } from "./ui";
+import { toggleSearchIcon, renderErrorInfo, renderWeatherInfo } from "./ui";
 
 const weatherForm = document.querySelector(".weather-form");
 const searchBtn = document.querySelector(".search-btn");
@@ -12,7 +12,11 @@ const modal = new Modal(searchModal);
 const renderDefaultWeatherInfo = async () => {
   const weatherInfo = await getWeatherInfo("London");
   toggleSearchIcon(searchBtn);
-  renderWeatherInfo(weatherInfo);
+  if (weatherInfo.error) {
+    renderErrorInfo(weatherInfo.error);
+  } else {
+    renderWeatherInfo(weatherInfo);
+  }
 };
 
 weatherForm.addEventListener("submit", async (e) => {
@@ -23,7 +27,11 @@ weatherForm.addEventListener("submit", async (e) => {
   const weatherInfo = await getWeatherInfo(location);
 
   toggleSearchIcon(searchLabel);
-  renderWeatherInfo(weatherInfo);
+  if (weatherInfo.error) {
+    renderErrorInfo(weatherInfo.error);
+  } else {
+    renderWeatherInfo(weatherInfo);
+  }
   modal.hide();
   e.target.reset();
 });
