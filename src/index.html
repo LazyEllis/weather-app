@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" class="h-100" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Wizard</title>
   </head>
-  <body>
-    <nav class="navbar">
+  <body class="h-100 d-flex flex-column">
+    <nav class="navbar bg-black">
       <div class="container-fluid">
         <span class="navbar-brand">Weather Wizard</span>
         <div class="search-btn-container">
           <button
-            class="btn search-btn text-start"
+            class="btn btn-dark search-btn text-start"
             data-bs-toggle="modal"
             data-bs-target="#search-modal"
           >
@@ -23,7 +23,7 @@
         </div>
       </div>
     </nav>
-    <div class="main">
+    <div class="main my-auto py-3">
       <div class="container"></div>
     </div>
     <div class="modal fade" id="search-modal">

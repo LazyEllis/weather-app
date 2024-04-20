@@ -4,6 +4,12 @@
 $placeholder-color: #aeb2b6;
 $border-color: #495057;
 $gray-300: #dee2e6;
+$bg-day: #204c8c;
+$bg-night: #1e355a;
+$card-color-day: #315b96;
+$card-color-night: #314769;
+$hero-image-day: "../img/day.webp";
+$hero-image-night: "../img/night.webp";
 
 @mixin search-box($border-color, $color) {
   border-color: $border-color;
@@ -12,6 +18,26 @@ $gray-300: #dee2e6;
   i {
     color: inherit;
   }
+}
+
+@mixin theme-colors($bg-color, $card-color, $hero-image) {
+  background-color: $bg-color;
+
+  .card {
+    background-color: $card-color;
+  }
+
+  .hero.card {
+    background: url($hero-image) no-repeat center center;
+  }
+}
+
+.day-theme {
+  @include theme-colors($bg-day, $card-color-day, $hero-image-day);
+}
+
+.night-theme {
+  @include theme-colors($bg-night, $card-color-night, $hero-image-night);
 }
 
 .btn.search-btn {

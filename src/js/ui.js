@@ -1,6 +1,14 @@
+const body = document.querySelector("body");
 const container = document.querySelector(".container");
 const spinner = document.querySelector(".spinner-border");
 
+const switchClass = (element, initialClass, finalClass) => {
+  if (element.classList.contains(initialClass)) {
+    element.classList.remove(initialClass);
+  }
+
+  element.classList.add(finalClass);
+};
 const clearWeatherInfo = () => {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
@@ -11,6 +19,14 @@ const createRow = () => {
   const row = document.createElement("div");
   row.classList.add("row", "row-cols-1", "row-cols-xs-2", "g-3");
   return row;
+};
+
+const setTheme = (dayStatus) => {
+  if (dayStatus === 0) {
+    switchClass(body, "day-theme", "night-theme");
+  } else {
+    switchClass(body, "night-theme", "day-theme");
+  }
 };
 
 const createCardTitle = (title) => {
@@ -73,7 +89,7 @@ const createHeader = (location, region, country) => {
   const locationDiv = document.createElement("div");
   const locationIcon = document.createElement("i");
 
-  header.classList.add("py-3");
+  header.classList.add("pb-3");
   locationIcon.classList.add("bi", "bi-house-door-fill", "me-2");
 
   locationDiv.textContent = `${location}, ${region}, ${country}`;
@@ -154,6 +170,7 @@ export const toggleSearchIcon = (searchBox) => {
 export const renderWeatherInfo = (weatherInfo) => {
   clearWeatherInfo();
 
+  setTheme(weatherInfo.dayStatus);
   const header = createHeader(
     weatherInfo.location,
     weatherInfo.region,
