@@ -9,14 +9,18 @@ const searchModal = document.querySelector("#search-modal");
 const searchLabel = document.querySelector(".search-label");
 const modal = new Modal(searchModal);
 
+const renderInfo = (info) => {
+  if (info.error) {
+    renderErrorInfo(info.error);
+  } else {
+    renderWeatherInfo(info);
+  }
+};
+
 const renderDefaultWeatherInfo = async () => {
   const weatherInfo = await getWeatherInfo("auto:ip");
   toggleSearchIcon(searchBtn);
-  if (weatherInfo.error) {
-    renderErrorInfo(weatherInfo.error);
-  } else {
-    renderWeatherInfo(weatherInfo);
-  }
+  renderInfo(weatherInfo);
 };
 
 weatherForm.addEventListener("submit", async (e) => {
@@ -27,11 +31,7 @@ weatherForm.addEventListener("submit", async (e) => {
   const weatherInfo = await getWeatherInfo(location);
 
   toggleSearchIcon(searchLabel);
-  if (weatherInfo.error) {
-    renderErrorInfo(weatherInfo.error);
-  } else {
-    renderWeatherInfo(weatherInfo);
-  }
+  renderInfo(weatherInfo);
   modal.hide();
   e.target.reset();
 });
