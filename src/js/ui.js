@@ -1,22 +1,43 @@
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
 
+/**
+ * Switches CSS classes on an HTML element.
+ * @param {HTMLElement} element - The HTML element to switch classes on.
+ * @param {string} initialClass - The initial CSS class to remove.
+ * @param {string} finalClass - The final CSS class to add.
+ */
 const switchClass = (element, initialClass, finalClass) => {
   element.classList.remove(initialClass);
   element.classList.add(finalClass);
 };
+
+/**
+ * Removes all child elements from a container.
+ */
 const clearWeatherInfo = () => {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
 };
 
+/**
+ * Creates a new HTML row element with specified classes.
+ * @returns {HTMLDivElement} - The created row element.
+ */
 const createRow = () => {
   const row = document.createElement("div");
   row.classList.add("row", "row-cols-1", "row-cols-xs-2", "g-3");
   return row;
 };
 
+/**
+ * Creates a new HTML element with specified tag, classes, and optional text content.
+ * @param {string} tag - The HTML tag for the element.
+ * @param {string[]} classes - An array of CSS classes to add to the element.
+ * @param {string} text - Optional text content for the element.
+ * @returns {HTMLElement} - The created HTML element.
+ */
 const createCustomElement = (tag, classes, text) => {
   const element = document.createElement(tag);
   element.classList.add(...classes);
@@ -24,6 +45,12 @@ const createCustomElement = (tag, classes, text) => {
   return element;
 };
 
+/**
+ * Gets formatted text for specific weather card titles.
+ * @param {string} title - The title of the weather card.
+ * @param {string} info - The corresponding weather information.
+ * @returns {string} - The formatted text for the weather card.
+ */
 const getCardText = (title, info) => {
   switch (title) {
     case "Feels Like":
@@ -41,12 +68,16 @@ const getCardText = (title, info) => {
     case "Pressure":
       return `${info} mb`;
     case "Sunrise":
-      return info.slice(1);
+      return info.slice(1); // Remove leading zero character
     default:
       return "";
   }
 };
 
+/**
+ * Sets the theme (day or night) based on the provided flag.
+ * @param {boolean} isDay - Flag indicating whether it is daytime.
+ */
 const setTheme = (isDay) => {
   const themeClass = isDay ? "day-theme" : "night-theme";
   switchClass(
@@ -56,6 +87,13 @@ const setTheme = (isDay) => {
   );
 };
 
+/**
+ * Creates a header element with location information.
+ * @param {string} location - The name of the location.
+ * @param {string} region - The region of the location.
+ * @param {string} country - The country of the location.
+ * @returns {HTMLDivElement} - The created header element.
+ */
 const createHeader = (location, region, country) => {
   const header = document.createElement("div");
   const locationDiv = document.createElement("div");
@@ -72,6 +110,13 @@ const createHeader = (location, region, country) => {
   return header;
 };
 
+/**
+ * Creates a hero card element displaying current weather.
+ * @param {string} icon - The URL of the weather icon.
+ * @param {number} temperature - The current temperature.
+ * @param {string} condition - The current weather condition.
+ * @returns {HTMLDivElement} - The created hero card element.
+ */
 const createHeroCard = (icon, temperature, condition) => {
   const heroCard = document.createElement("div");
   const cardBody = document.createElement("div");
@@ -104,6 +149,12 @@ const createHeroCard = (icon, temperature, condition) => {
   return heroCard;
 };
 
+/**
+ * Creates a weather info card element with specified title and information.
+ * @param {string} title - The title of the weather information.
+ * @param {string} info - The corresponding weather information.
+ * @returns {HTMLDivElement} - The created weather info card element.
+ */
 const createWeatherInfoCard = (title, info) => {
   const cardContainer = document.createElement("div");
   const card = document.createElement("div");
@@ -131,6 +182,10 @@ const createWeatherInfoCard = (title, info) => {
   return cardContainer;
 };
 
+/**
+ * Toggles the search icon in the search box.
+ * @param {HTMLElement} searchBox - The search box element.
+ */
 export const toggleSearchIcon = (searchBox) => {
   const searchIcon = createCustomElement("i", ["bi", "bi-search"]);
   const spinner = createCustomElement("div", [
@@ -149,6 +204,10 @@ export const toggleSearchIcon = (searchBox) => {
   );
 };
 
+/**
+ * Renders an error message on the page.
+ * @param {string} error - The error message to display.
+ */
 export const renderErrorInfo = (error) => {
   clearWeatherInfo();
 
@@ -172,6 +231,10 @@ export const renderErrorInfo = (error) => {
   container.append(errorContainer);
 };
 
+/**
+ * Renders weather information on the page.
+ * @param {Object} weatherInfo - The weather information object.
+ */
 export const renderWeatherInfo = (weatherInfo) => {
   clearWeatherInfo();
 
