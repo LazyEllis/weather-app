@@ -29,6 +29,58 @@ const setTheme = (isDay) => {
   }
 };
 
+const createHeader = (location, region, country) => {
+  const header = document.createElement("div");
+  const locationDiv = document.createElement("div");
+  const locationIcon = document.createElement("i");
+
+  header.classList.add("pb-3");
+  locationIcon.classList.add("bi", "bi-house-door-fill", "me-2");
+
+  if (region === "" || region === null) {
+    locationDiv.textContent = `${location}, ${country}`;
+  } else {
+    locationDiv.textContent = `${location}, ${region}, ${country}`;
+  }
+
+  locationDiv.prepend(locationIcon);
+  header.append(locationDiv);
+
+  return header;
+};
+
+const createHeroCard = (icon, temperature, condition) => {
+  const heroCard = document.createElement("div");
+  const cardBody = document.createElement("div");
+  const cardTitle = document.createElement("div");
+  const cardText = document.createElement("div");
+  const flexContainer = document.createElement("div");
+  const iconImg = document.createElement("img");
+  const temperatureDiv = document.createElement("div");
+  const conditionDiv = document.createElement("div");
+
+  heroCard.classList.add("card", "mb-3");
+  cardBody.classList.add("card-body");
+  cardTitle.classList.add("card-title", "fw-medium");
+  cardText.classList.add("card-text");
+  flexContainer.classList.add("d-flex", "align-items-center");
+  temperatureDiv.classList.add("fs-1");
+  conditionDiv.classList.add("fs-5", "ps-2");
+
+  cardTitle.textContent = "Current Weather";
+
+  iconImg.src = icon;
+  temperatureDiv.textContent = `${temperature}°C`;
+  conditionDiv.textContent = condition;
+
+  flexContainer.append(iconImg, temperatureDiv);
+  cardText.append(flexContainer, conditionDiv);
+  cardBody.append(cardTitle, cardText);
+  heroCard.append(cardBody);
+
+  return heroCard;
+};
+
 const createCardTitle = (title) => {
   const cardTitle = document.createElement("div");
   const cardIcon = document.createElement("i");
@@ -82,53 +134,6 @@ const createCardText = (title, info) => {
   }
 
   return cardText;
-};
-
-const createHeader = (location, region, country) => {
-  const header = document.createElement("div");
-  const locationDiv = document.createElement("div");
-  const locationIcon = document.createElement("i");
-
-  header.classList.add("pb-3");
-  locationIcon.classList.add("bi", "bi-house-door-fill", "me-2");
-
-  locationDiv.textContent = `${location}, ${region}, ${country}`;
-  locationDiv.prepend(locationIcon);
-  header.append(locationDiv);
-
-  return header;
-};
-
-const createHeroCard = (icon, temperature, condition) => {
-  const heroCard = document.createElement("div");
-  const cardBody = document.createElement("div");
-  const cardTitle = document.createElement("div");
-  const cardText = document.createElement("div");
-  const flexContainer = document.createElement("div");
-  const iconImg = document.createElement("img");
-  const temperatureDiv = document.createElement("div");
-  const conditionDiv = document.createElement("div");
-
-  heroCard.classList.add("card", "mb-3");
-  cardBody.classList.add("card-body");
-  cardTitle.classList.add("card-title", "fw-medium");
-  cardText.classList.add("card-text");
-  flexContainer.classList.add("d-flex", "align-items-center");
-  temperatureDiv.classList.add("fs-1");
-  conditionDiv.classList.add("fs-5", "ps-2");
-
-  cardTitle.textContent = "Current Weather";
-
-  iconImg.src = icon;
-  temperatureDiv.textContent = `${temperature}°C`;
-  conditionDiv.textContent = condition;
-
-  flexContainer.append(iconImg, temperatureDiv);
-  cardText.append(flexContainer, conditionDiv);
-  cardBody.append(cardTitle, cardText);
-  heroCard.append(cardBody);
-
-  return heroCard;
 };
 
 const createWeatherInfoCard = (title, info) => {
