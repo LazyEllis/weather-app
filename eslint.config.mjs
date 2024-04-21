@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-extraneous-dependencies */
 import globals from "globals";
 
 import path from "path";
@@ -15,8 +17,13 @@ const compat = new FlatCompat({
 });
 
 export default [
-  { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
-  { languageOptions: { globals: globals.browser } },
+  {
+    settings: { "import/parsers": { espree: [".js", ".mjs"] } },
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaVersion: "latest" },
+    },
+  },
   ...compat.extends("airbnb-base"),
   eslintConfigPrettier,
 ];
