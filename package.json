@@ -1,7 +1,7 @@
 {
-  "name": "template-repo",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This repository contains a Weather App built using HTML, CSS, JavaScript, and Webpack. It fetches weather information for a given location using the WeatherAPI.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
