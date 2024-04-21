@@ -10,27 +10,23 @@ const getWeatherInfo = async (location) => {
       return { error: data.error.message };
     }
 
-    const weatherInfo = {
+    return {
       location: data.location.name,
       region: data.location.region,
       country: data.location.country,
-      condition: data.current.condition.text,
-      dayStatus: data.current.is_day,
+      isDay: data.current.is_day,
       icon: data.current.condition.icon,
-      temperatureCelsius: data.current.temp_c,
-      temperatureFahrenheit: data.current.temp_f,
+      temperature: data.current.temp_c,
+      condition: data.current.condition.text,
       uvIndex: data.current.uv,
       sunrise: data.forecast.forecastday[0].astro.sunrise,
       windSpeed: data.current.wind_kph,
       precipitation: data.current.precip_mm,
-      apparentTemperatureCelsius: data.current.feelslike_c,
-      apparentTemperatureFahrenheit: data.current.feelslike_f,
+      apparentTemperature: data.current.feelslike_c,
       humidity: data.current.humidity,
       visibility: data.current.vis_km,
       pressure: data.current.pressure_mb,
     };
-
-    return weatherInfo;
   } catch (error) {
     return { error: "An error occurred while fetching the weather data" };
   }

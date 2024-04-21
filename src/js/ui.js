@@ -21,11 +21,11 @@ const createRow = () => {
   return row;
 };
 
-const setTheme = (dayStatus) => {
-  if (dayStatus === 0) {
-    switchClass(body, "day-theme", "night-theme");
-  } else {
+const setTheme = (isDay) => {
+  if (isDay) {
     switchClass(body, "night-theme", "day-theme");
+  } else {
+    switchClass(body, "day-theme", "night-theme");
   }
 };
 
@@ -191,7 +191,7 @@ export const renderErrorInfo = (error) => {
 export const renderWeatherInfo = (weatherInfo) => {
   clearWeatherInfo();
 
-  setTheme(weatherInfo.dayStatus);
+  setTheme(weatherInfo.isDay);
   const header = createHeader(
     weatherInfo.location,
     weatherInfo.region,
@@ -199,7 +199,7 @@ export const renderWeatherInfo = (weatherInfo) => {
   );
   const heroCard = createHeroCard(
     weatherInfo.icon,
-    weatherInfo.temperatureCelsius,
+    weatherInfo.temperature,
     weatherInfo.condition
   );
   const row = createRow();
@@ -212,7 +212,7 @@ export const renderWeatherInfo = (weatherInfo) => {
   );
   const apparentTemperatureCard = createWeatherInfoCard(
     "Feels Like",
-    weatherInfo.apparentTemperatureCelsius
+    weatherInfo.apparentTemperature
   );
   const humidityCard = createWeatherInfoCard("Humidity", weatherInfo.humidity);
   const visibilityCard = createWeatherInfoCard(
