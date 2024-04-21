@@ -125,7 +125,7 @@ const createHeroCard = (icon, temperature, condition) => {
   const temperatureDiv = document.createElement("div");
   const conditionDiv = document.createElement("div");
 
-  heroCard.classList.add("card", "mb-3");
+  heroCard.classList.add("card", "hero", "mb-3");
   cardBody.classList.add("card-body");
   flexContainer.classList.add("d-flex", "align-items-center");
   temperatureDiv.classList.add("fs-1");
