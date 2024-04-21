@@ -1,5 +1,6 @@
 import "../scss/style.scss";
-import { Modal } from "bootstrap";
+import "bootstrap/js/dist/button";
+import Modal from "bootstrap/js/dist/modal";
 import getWeatherInfo from "./weather";
 import { toggleSearchIcon, renderErrorInfo, renderWeatherInfo } from "./ui";
 
