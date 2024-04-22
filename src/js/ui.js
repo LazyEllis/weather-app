@@ -75,6 +75,34 @@ const getCardText = (title, info) => {
 };
 
 /**
+ * Gets the icon for specific weather card titles.
+ * @param {string} title - The title of the weather card.
+ * @returns {string[]} - An array containing the icon classes.
+ */
+const getCardIcon = (title) => {
+  switch (title) {
+    case "Feels Like":
+      return ["bi", "bi-thermometer-sun", "me-2"];
+    case "Wind":
+      return ["bi", "bi-wind", "me-2"];
+    case "UV Index":
+      return ["bi", "bi-sun-fill", "me-2"];
+    case "Precipitation":
+      return ["bi", "bi-droplet-fill", "me-2"];
+    case "Humidity":
+      return ["bi", "bi-water", "me-2"];
+    case "Visibility":
+      return ["bi", "bi-eye-fill", "me-2"];
+    case "Pressure":
+      return ["bi", "bi-speedometer", "me-2"];
+    case "Sunrise":
+      return ["bi", "bi-sunrise-fill", "me-2"];
+    default:
+      return [];
+  }
+};
+
+/**
  * Sets the theme (day or night) based on the provided flag.
  * @param {boolean} isDay - Flag indicating whether it is daytime.
  */
@@ -174,7 +202,9 @@ const createWeatherInfoCard = (title, info) => {
     ["card-text", "fs-1"],
     getCardText(title, info)
   );
+  const cardIcon = createCustomElement("i", getCardIcon(title));
 
+  cardTitle.prepend(cardIcon);
   cardBody.append(cardTitle, cardText);
   card.append(cardBody);
   cardContainer.append(card);
